@@ -7,8 +7,10 @@ import { Sparkles, Code, Brain, Zap } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
+import { useNavigate } from 'react-router-dom';
 
 const Index = () => {
+  const navigate = useNavigate();
   const tutorials = [
     {
       title: "Python Basics: Variables & Print",
@@ -61,11 +63,20 @@ const Index = () => {
             </div>
             
             <div className="flex flex-wrap justify-center gap-4 mt-8">
-              <Button size="lg" className="bg-gradient-primary hover:opacity-90 transition-opacity">
+              <Button 
+                size="lg" 
+                className="bg-gradient-primary hover:opacity-90 transition-opacity"
+                onClick={() => navigate('/tutorials')}
+              >
                 <Sparkles className="w-5 h-5 mr-2" />
                 Start Learning Free
               </Button>
-              <Button size="lg" variant="outline" className="glow-border hover:bg-primary/10">
+              <Button 
+                size="lg" 
+                variant="outline" 
+                className="glow-border hover:bg-primary/10"
+                onClick={() => navigate('/practice')}
+              >
                 <Code className="w-5 h-5 mr-2" />
                 Try Code Editor
               </Button>
@@ -166,7 +177,7 @@ for i in range(3):
                 <TutorialCard
                   key={index}
                   {...tutorial}
-                  onClick={() => console.log(`Starting tutorial: ${tutorial.title}`)}
+                  onClick={() => navigate('/tutorials')}
                 />
               ))}
             </div>
