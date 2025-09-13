@@ -2,41 +2,64 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* CodeGenie Design System - Interactive Programming Learning Platform */
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Core Brand Colors */
+    --background: 220 13% 9%;
+    --foreground: 220 9% 95%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card: 220 13% 11%;
+    --card-foreground: 220 9% 95%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover: 220 13% 11%;
+    --popover-foreground: 220 9% 95%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    /* Primary - Electric Purple */
+    --primary: 270 91% 65%;
+    --primary-foreground: 220 13% 9%;
+    --primary-glow: 270 91% 75%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    /* Secondary - Cyber Blue */
+    --secondary: 220 13% 15%;
+    --secondary-foreground: 220 9% 95%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 220 13% 13%;
+    --muted-foreground: 220 9% 60%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    /* Accent - Neon Cyan */
+    --accent: 180 100% 50%;
+    --accent-foreground: 220 13% 9%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    /* Success - Matrix Green */
+    --success: 120 100% 50%;
+    --success-foreground: 220 13% 9%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    /* Error - Warning Red */
+    --destructive: 0 100% 60%;
+    --destructive-foreground: 220 9% 95%;
 
-    --radius: 0.5rem;
+    --border: 220 13% 20%;
+    --input: 220 13% 15%;
+    --ring: 270 91% 65%;
+
+    /* Code Editor Colors */
+    --code-bg: 220 13% 8%;
+    --code-line: 220 13% 12%;
+    --code-selection: 270 91% 65% / 0.2;
+    
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(270 91% 65%) 0%, hsl(240 91% 70%) 50%, hsl(180 100% 50%) 100%);
+    --gradient-card: linear-gradient(135deg, hsl(220 13% 11%) 0%, hsl(220 13% 13%) 100%);
+    --gradient-glow: radial-gradient(ellipse at center, hsl(270 91% 65% / 0.3) 0%, transparent 70%);
+    
+    /* Animations */
+    --animation-float: float 6s ease-in-out infinite;
+    --animation-pulse-glow: pulse-glow 2s ease-in-out infinite alternate;
+    --animation-shimmer: shimmer 2s ease-in-out infinite;
+    
+    --radius: 0.75rem;
 
     --sidebar-background: 0 0% 98%;
 
@@ -94,12 +117,58 @@ All colors MUST be HSL.
   }
 }
 
+/* Custom Animations */
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-20px) rotate(180deg); }
+}
+
+@keyframes pulse-glow {
+  0% { box-shadow: 0 0 20px hsl(var(--primary) / 0.4); }
+  100% { box-shadow: 0 0 40px hsl(var(--primary) / 0.8), 0 0 60px hsl(var(--primary) / 0.4); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+@keyframes particle-float {
+  0%, 100% { transform: translateY(0px) translateX(0px); opacity: 0.3; }
+  25% { transform: translateY(-100px) translateX(50px); opacity: 0.8; }
+  50% { transform: translateY(-200px) translateX(-30px); opacity: 1; }
+  75% { transform: translateY(-100px) translateX(-80px); opacity: 0.6; }
+}
+
+/* Component Styles */
+@layer components {
+  .gradient-text {
+    @apply bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent;
+  }
+  
+  .glow-border {
+    @apply border border-primary/30 shadow-[0_0_20px_hsl(var(--primary)/0.3)];
+  }
+  
+  .code-editor {
+    @apply bg-[hsl(var(--code-bg))] border border-border/50 rounded-lg font-mono text-sm;
+  }
+  
+  .particle {
+    @apply absolute w-2 h-2 bg-primary/30 rounded-full animate-[particle-float_8s_ease-in-out_infinite];
+  }
+  
+  .floating-orb {
+    @apply absolute rounded-full blur-xl opacity-30 animate-[float_6s_ease-in-out_infinite];
+  }
+}
+
 @layer base {
   * {
     @apply border-border;
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground overflow-x-hidden;
   }
 }
